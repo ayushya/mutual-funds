@@ -26,57 +26,34 @@ export default class FundIntro extends React.PureComponent {
         <h3 className="fund-title inline-block">
           {name}
         </h3>
-        <div className="inline-block">
-          
-        </div>
 
         <div className="fund-category">
-          {`${fund_type} · ${fund_category}`}
+          {`${fund_type ? fund_type : ''}${fund_type && fund_category ? ' · ' : ''}${fund_category ? fund_category : ''}`}
         </div>
 
         <h4 className="fund-title">
           Past Performance
         </h4>
-        {
-          inception ?
-          <CardItem
-            label="SINCE LAUNCH (SL)"
-            value={`${inception.toFixed(1)}%`}
-          /> :
-          null
-        }
-        {
-          year_1 ?
-          <CardItem
-            label="1Y Return"
-            value={`${year_1.toFixed(1)}%`}
-          /> :
-          null
-        }
-        {
-          year_3 ?
-          <CardItem
-            label="3Y Return"
-            value={`${year_3.toFixed(1)}%`}
-          /> :
-          null
-        }
-        {
-          year_5 ?
-          <CardItem
-            label="5Y Return"
-            value={`${year_5.toFixed(1)}%`}
-          /> :
-          null
-        }
-        {
-          volatility ?
-          <CardItem
-            label="Volatility (Vol)"
-            value={`${volatility.toFixed(1)}%`}
-          /> :
-          null
-        }
+        <CardItem
+          label="SINCE LAUNCH (SL)"
+          value={inception !== undefined ? `${inception.toFixed(1)}%` : 'NA'}
+        />
+        <CardItem
+          label="1Y Return"
+          value={year_1 !== undefined ? `${year_1.toFixed(1)}%` : 'NA'}
+        />
+        <CardItem
+          label="3Y Return"
+          value={year_3 !== undefined ? `${year_3.toFixed(1)}%`: 'NA'}
+        />
+        <CardItem
+          label="5Y Return"
+          value={year_5 !== undefined ? `${year_5.toFixed(1)}%` : 'NA'}
+        />
+        <CardItem
+          label="Volatility (Vol)"
+          value={volatility !== undefined ? `${volatility.toFixed(1)}%`: 'NA'}
+        />
       </div>
     )
   }
