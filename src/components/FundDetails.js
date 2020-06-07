@@ -35,7 +35,7 @@ export default class FundDetails extends React.PureComponent {
       <div className="container">
         <ReactSVG
           className="back-button"
-          src={require('../images/back.svg')}
+          src={'https://raw.githubusercontent.com/ayushya/mutual-funds/master/src/images/back.svg'}
           onClick={() => this.props.handleBackButton()}
         />
         <div className="title">
