@@ -12,6 +12,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
+const RESULTS_PER_LOAD = 10;
 
 export default class Content extends React.PureComponent {
   constructor (props) {
@@ -236,7 +237,7 @@ export default class Content extends React.PureComponent {
           null
         }
         {
-          this.props.allFunds ?
+          filteredFunds?.length ?
           <InfiniteScroll
             pageStart={0}
             loadMore={() => {
@@ -246,11 +247,11 @@ export default class Content extends React.PureComponent {
               })
               }, 500); // This Delay is added to demonstrate the effect that we show a loader and then show the rest of the data
             }}
-            hasMore={true || false}
+            hasMore={filteredFunds?.length > (this.state.pagesLoaded * RESULTS_PER_LOAD)}
             loader={<div key={this.state.pagesLoaded} className="push-20"><Loading /></div>}
           >
             {
-              filteredFunds?.slice(0, this.state.pagesLoaded * 10)
+              filteredFunds?.slice(0, this.state.pagesLoaded * RESULTS_PER_LOAD)
               .map((fund, index) => {
                 return (
                   <FundIntro
@@ -262,6 +263,8 @@ export default class Content extends React.PureComponent {
               })
             }
           </InfiniteScroll> :
+          filteredFunds?.length === 0 ?
+          <h3 className="fund-title push-20"><center>No Result Found</center></h3> :
           null
         }
       </div>
