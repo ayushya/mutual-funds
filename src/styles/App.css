@@ -139,7 +139,7 @@ body {
   }
 
   .plan-check {
-    flex-direction: row;
+    flex-direction: row !important;
   }
 
   .filters {
