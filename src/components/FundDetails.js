@@ -1,8 +1,8 @@
 import React from 'react';
 
-import backArrow from '../images/back.svg';
 import { getFundDetails } from '../utils/initialData';
 import Loading from './Loading';
+import { ReactSVG } from 'react-svg'
 
 export default class FundDetails extends React.PureComponent {
   constructor (props) {
@@ -33,10 +33,9 @@ export default class FundDetails extends React.PureComponent {
 
     return (
       <div className="container">
-        <img
-          src={backArrow}
-          alt="Go back"
+        <ReactSVG
           className="back-button"
+          src={require('../images/back.svg')}
           onClick={() => this.props.handleBackButton()}
         />
         <div className="title">

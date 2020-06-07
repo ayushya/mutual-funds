@@ -34,7 +34,7 @@ body {
   margin-right: 0px !important;
 }
 
-.back-button {
+.back-button svg {
   height: 30px;
   position: absolute;
   top:15px;
