@@ -79,10 +79,11 @@ export default class Content extends React.PureComponent {
     const sortedFunds =
       filteredFundsByPlan
       ?.sort((fundA, fundB) => {
+        const valueOrNegativeInfinity = (value) => value ? value : -Infinity; 
         if (this.state.sortBy === 'volatility') {
-          return fundA[this.state.sortBy] - fundB[this.state.sortBy];
+          return valueOrNegativeInfinity(fundA[this.state.sortBy]) - valueOrNegativeInfinity(fundB[this.state.sortBy]);
         } else {
-          return fundB['returns'][this.state.sortBy] - fundA['returns'][this.state.sortBy];
+          return valueOrNegativeInfinity(fundB['returns'][this.state.sortBy]) - valueOrNegativeInfinity(fundA['returns'][this.state.sortBy]);
         }
       });
 
