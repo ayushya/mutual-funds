@@ -1,4 +1,4 @@
-Loan Application
+Mutual Funds
 
 ## Installing the App
 
