@@ -13,7 +13,10 @@
     "start": "react-scripts start",
     "build-app": "react-scripts build",
     "fix-static-files-path": "./fix-static-files.sh",
-    "build": "yarn run build-app && yarn run fix-static-files-path"
+    "build-fix": "yarn run build-app && yarn run fix-static-files-path",
+    "build": "yarn run build-app",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -29,5 +32,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.0.0"
   }
 }
