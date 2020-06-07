@@ -13,8 +13,7 @@
     "start": "react-scripts start",
     "build-app": "react-scripts build",
     "fix-static-files-path": "./fix-static-files.sh",
-    "build-fix": "yarn run build-app && yarn run fix-static-files-path",
-    "build": "yarn run build-app",
+    "build": "yarn run build-app && yarn run fix-static-files-path",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
