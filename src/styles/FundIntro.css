@@ -1,0 +1,21 @@
+.fund-list {
+  cursor: pointer;
+  padding: 10px 20px 30px 20px;
+}
+
+.fund-list:hover {
+  border: 1px solid #2B91DD;
+}
+
+.fund-title {
+  margin-bottom: 8px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.fund-category {
+  text-transform: uppercase;
+  font-size: 12px;
+}

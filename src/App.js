@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
+import './styles/App.css';
 
 import {
   getAllFunds,
 } from './utils/initialData';
-import Loading from './components/Loading';
 import Content from './components/Content';
 
 class App extends React.Component {
@@ -26,20 +25,6 @@ class App extends React.Component {
   }
 
   render () {
-    const {
-      allFunds,
-    } = this.state;
-
-
-
-    if (!allFunds) {
-      return (
-        <div className="push-20">
-          <Loading />
-        </div>
-      )
-    }
-
     return (
       <Content {...this.state} />
     );
