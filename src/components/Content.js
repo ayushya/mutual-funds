@@ -52,7 +52,7 @@ export default class Content extends React.PureComponent {
               }, 500); // This Delay is added to demonstrate the effect that we show a loader and then show the rest of the data
             }}
             hasMore={true || false}
-            loader={<div className="push-20"><Loading /></div>}
+            loader={<div key={this.state.pagesLoaded} className="push-20"><Loading /></div>}
           >
             {
               this.props.allFunds?.slice(0, this.state.pagesLoaded * 10).map((fund, index) => {
