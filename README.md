@@ -1,4 +1,10 @@
-Mutual Funds
+# Mutual Funds
+
+## Build Status
+![CI](https://github.com/ayushya/mutual-funds/workflows/CI/badge.svg)
+
+## Live Site
+[https://ayushya.github.io/mutual-funds/](https://ayushya.github.io/mutual-funds/)
 
 ## Installing the App
 
