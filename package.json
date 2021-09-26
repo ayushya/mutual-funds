@@ -1,5 +1,6 @@
 {
   "name": "mutual-funds",
+  "homepage": "https://ayushya.github.io/mutual-funds/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,7 +23,7 @@
     "start": "react-scripts start",
     "build-app": "react-scripts build",
     "fix-static-files-path": "./fix-static-files.sh",
-    "build": "yarn run build-app && yarn run fix-static-files-path",
+    "build": "yarn run build-app",
     "test": "react-scripts test",
     "predeploy": "npm run build",
     "eject": "react-scripts eject"
