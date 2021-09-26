@@ -2,28 +2,29 @@ import { useEffect } from 'react';
 
 import axios from 'axios';
 
-import { makeStyles } from '@material-ui/core';
-
+// import { makeStyles } from '@material-ui/core';
 import { GET_FUNDS } from './constants';
 import { formatData } from './utility';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   formControl: {
+//     margin: theme.spacing(1),
+//     minWidth: 120,
+//   },
+//   selectEmpty: {
+//     marginTop: theme.spacing(2),
+//   },
+// }));
 
 const FilterOptions = (props) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   
   const {
-    duration,
-    durationSelected, setDurationSelected,
-    rawFunds, setRawFunds,
+    // duration,
+    durationSelected,
+    // setDurationSelected,
+    // rawFunds, 
+    setRawFunds,
     setFunds,
   } = props;
 
@@ -154,12 +155,12 @@ const FilterOptions = (props) => {
   //   loadFreshData(false, false, districtsSelected, value);
   // }
 
-  const handleDurationChange = async (event) => {
-    const value = event.target.value;
-    setDurationSelected(value);
-    setFunds(await formatData(rawFunds, value));
-    // loadFreshData(false, false, districtsSelected, doseSelected, value);
-  }
+  // const handleDurationChange = async (event) => {
+  //   const value = event.target.value;
+  //   setDurationSelected(value);
+  //   setFunds(await formatData(rawFunds, value));
+  //   // loadFreshData(false, false, districtsSelected, doseSelected, value);
+  // }
 
   // const ageGroupMenuText = (value) => {
   //   switch (value) {

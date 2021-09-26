@@ -11,7 +11,15 @@ export const formatData = async (data, duration) => {
             const fundHouseList = Object.keys(data[category][subCategory]);
             fundHouseList.forEach((fundHouse) => {
                 data[category][subCategory][fundHouse].forEach((fund) => {
-                    const { c, kc, n, r, re, v } = fund;
+                    const {
+                        c,
+                        kc,
+                        n,
+                        r,
+                        // re,
+                        v,
+                     } = fund;
+                    debugger;
                     fundList.push({
                         name: n,
                         code: c,
