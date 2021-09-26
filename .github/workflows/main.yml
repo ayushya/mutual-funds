@@ -14,8 +14,8 @@ jobs:
 
       - name: Build and Prepare for Deployment
         run: |
-          yarn install
-          yarn run predeploy
+          npm ci
+          npm run predeploy
 
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2.1.3
