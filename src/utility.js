@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { GET_FUNDS_DETAILS } from './constants';
+import { GET_FUNDS_DETAILS } from "./constants";
 
 export const formatData = async (data, duration) => {
     let fundList = [];
@@ -18,8 +18,7 @@ export const formatData = async (data, duration) => {
                         r,
                         // re,
                         v,
-                     } = fund;
-                    debugger;
+                    } = fund;
                     fundList.push({
                         name: n,
                         code: c,
@@ -30,7 +29,7 @@ export const formatData = async (data, duration) => {
                         subCategory,
                     });
                 });
-            })
+            });
         });
     });
 
@@ -39,16 +38,31 @@ export const formatData = async (data, duration) => {
 
     const promiseList = [];
     for (let i = 0; i < NUMBER_OF_API_CALLS; i++) {
-        const fundCodeListString = fundList.slice(i * DATA_BATCH_SIZE, (i * DATA_BATCH_SIZE) + DATA_BATCH_SIZE).reduce((prev, curr) => prev ? `${prev}|${curr.code}` : curr.code, '');
-        const apiPromise = axios.get(GET_FUNDS_DETAILS(fundCodeListString))
+        const fundCodeListString = fundList
+            .slice(i * DATA_BATCH_SIZE, i * DATA_BATCH_SIZE + DATA_BATCH_SIZE)
+            .reduce(
+                (prev, curr) => (prev ? `${prev}|${curr.code}` : curr.code),
+                ""
+            );
+        const apiPromise = axios
+            .get(GET_FUNDS_DETAILS(fundCodeListString))
             .then((response) => {
                 const { data } = response;
                 data.forEach((details, index) => {
-                    fundList[(i * DATA_BATCH_SIZE) + index].details = details;
+                    fundList[i * DATA_BATCH_SIZE + index].details = details;
                 });
             });
         promiseList.push(apiPromise);
     }
     await Promise.all(promiseList);
-    return fundList;
-}
+
+    // Filter all the funds which are unavailable
+    return fundList.filter(
+        (fund) =>
+            !(
+                fund?.details?.sip_available === "N" &&
+                fund?.details?.lump_available === "N" &&
+                fund?.details?.redemption_allowed === "N"
+            )
+    );
+};
