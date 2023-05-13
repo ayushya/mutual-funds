@@ -1,12 +1,9 @@
-import 'ag-grid-community/dist/styles/ag-grid.css';
-import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 import React from 'react';
 
-import {
-  AgGridColumn,
-  AgGridReact,
-} from 'ag-grid-react';
+import { AgGridReact } from 'ag-grid-react';
 
 import { CircularProgress } from '@material-ui/core';
 
@@ -40,6 +37,92 @@ function App() {
     setGridApi(params.api);
   }
 
+  const columnDefs = [
+    {
+      headerName: "Fund Name",
+      field: "name",
+      sortable: true,
+      filter: true,
+      width: 400,
+    },
+    {
+      headerName: "Category",
+      field: "category",
+      sortable: true,
+      filter: true,
+      width: 120,
+    },
+    {
+      headerName: "Sub Category",
+      field: "subCategory",
+      sortable: true,
+      filter: true,
+      width: 180,
+    },
+    {
+      headerName:"NAV",
+      field:"details.nav.nav",
+      sortable:true,
+      filter:true,
+      width:120,
+    },
+    {
+      headerName: "1 week",
+      field: `details.returns.week_1`,
+      sortable: true,
+      filter: false,
+      width: 120,
+    },
+    {
+      headerName: "1 year",
+      field: `details.returns.year_1`,
+      sortable: true,
+      filter: false,
+      width: 120,
+      sort: 'desc',
+    },
+    {
+      headerName: "3 year",
+      field: `details.returns.year_3`,
+      sortable: true,
+      filter: false,
+      width: 120,
+      sort: 'desc',
+    },
+    {
+      headerName: "5 year",
+      field: `details.returns.year_5`,
+      sortable: true,
+      filter: false,
+      width: 120,
+      sort: 'desc',
+    },
+    {
+      headerName: "Inception",
+      field: `details.returns.inception`,
+      sortable: true,
+      filter: false,
+      width: 140,
+      sort: 'desc',
+    },
+    {
+      headerName: "Expense Ratio",
+      field: `details.expense_ratio`,
+      sortable: true,
+      filter: false,
+      width: 180,
+      sort: 'asc',
+    },
+    {
+      headerName: "Volatility",
+      field: `details.volatility`,
+      sortable: true,
+      filter: false,
+      width: 150,
+      sort: 'asc',
+    }
+  ];
+
   // const height = 'calc(100vh - 72px)';
   const calculatedHeight = 'calc(100vh)';
 
@@ -59,6 +142,7 @@ function App() {
                 resizable: true,
                 suppressMovable: true
               }}
+              columnDefs={columnDefs}
               enableCellTextSelection={true}
               defaultColGroupDef={{ marryChildren: true }}
               animateRows={true}
@@ -67,127 +151,6 @@ function App() {
               onGridReady={onGridReady}
               tooltipShowDelay={0}
               rowData={funds}>
-              {/* <AgGridColumn
-                field="pincode"
-                sortable={true}
-                filter={true}
-                cellRenderer={dataWithMapLinkWrapperRenderer}
-                tooltipValueGetter={() => 'Open in Google Maps'}
-              /> */}
-              <AgGridColumn
-                headerName="Fund Name"
-                field="name"
-                // tooltipValueGetter={({ value }) => `Where is ${value} ?`}
-                sortable={true}
-                filter={true}
-                width={400}
-                // cellRenderer={dataWithMapLinkWrapperRenderer}
-              />
-              <AgGridColumn
-                headerName="Category"
-                field="category"
-                // tooltipValueGetter={({ value }) => `Where is ${value} ?`}
-                sortable={true}
-                filter={true}
-                width={120}
-              // cellRenderer={dataWithMapLinkWrapperRenderer}
-              />
-              <AgGridColumn
-                headerName="Sub Category"
-                field="subCategory"
-                // tooltipValueGetter={({ value }) => `Where is ${value} ?`}
-                sortable={true}
-                filter={true}
-                width={180}
-              // cellRenderer={dataWithMapLinkWrapperRenderer}
-              />
-              <AgGridColumn
-                headerName="NAV"
-                field="details.nav.nav"
-                // tooltipValueGetter={({ value }) => `Where is ${value} ?`}
-                sortable={true}
-                filter={true}
-                width={120}
-              // cellRenderer={dataWithMapLinkWrapperRenderer}
-              />
-              <AgGridColumn
-                headerName="1 year"
-                field={`returns.1`}
-                sortable={true}
-                filter={false}
-                width={120}
-                sort={'desc'}
-              />
-              <AgGridColumn
-                headerName="3 year"
-                field={`returns.3`}
-                sortable={true}
-                filter={false}
-                width={120}
-                sort={'desc'}
-              />
-              <AgGridColumn
-                headerName="5 year"
-                field={`returns.5`}
-                sortable={true}
-                filter={false}
-                width={120}
-                sort={'desc'}
-              />
-              <AgGridColumn
-                headerName="Expense Ratio"
-                field={`details.expense_ratio`}
-                sortable={true}
-                filter={false}
-                width={180}
-                sort={'asc'}
-              />
-              <AgGridColumn
-                headerName="Volatility"
-                field={`volatility`}
-                sortable={true}
-                filter={false}
-                width={150}
-                sort={'asc'}
-              />
-              {/* <AgGridColumn
-                headerName="Fee"
-                field="fee_type"
-                valueGetter={({ data: { fee_type, vaccine_fees } }) => vaccine_fees?.[0].fee || fee_type}
-                valueFormatter={({ data: { fee_type, vaccine_fees } }) => vaccine_fees ? `₹ ${vaccine_fees?.[0].fee}` : fee_type}
-                sortable={true}
-                filter={true}
-                cellStyle={feeStyle}
-              />
-              <AgGridColumn
-                headerName="# Total"
-                field={`availability.${ageGroupSelected}.${vaccineSelected}_total`}
-                sortable={true}
-                filter={false}
-                width={120}
-                cellStyle={quantityStyle}
-                sort={'desc'}
-                cellRenderer={quantityRenderer}
-              />
-              {
-                dateMap?.map((dateItem, index) =>
-                  <AgGridColumn
-                    key={index}
-                    headerName={dateItem}
-                    field={`availability.${ageGroupSelected}.${vaccineSelected}.${dateItem}`}
-                    sortable={true}
-                    filter={false}
-                    width={130}
-                    cellStyle={quantityStyle}
-                    cellRenderer={quantityRenderer}
-                    onCellClicked={({ event, value }) => {
-                      if (value > 0) {
-                        event.target.querySelector('a')?.click();
-                      }
-                    }}
-                  />
-                )
-              } */}
             </AgGridReact>
           </div> :
           <div style={{ height: calculatedHeight, width: '100%', display: 'flex', justifyContent: 'center' }}>

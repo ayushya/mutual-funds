@@ -14,8 +14,8 @@ jobs:
 
       - name: Build and Prepare for Deployment
         run: |
-          npm ci
-          npm run predeploy
+          rm -rf node_modules && yarn install --frozen-lockfile
+          yarn run predeploy
 
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2.1.3
