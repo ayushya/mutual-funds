@@ -1,37 +1,48 @@
-import axios from "axios";
+import axios from 'axios';
 
-import { GET_FUNDS_DETAILS } from "./constants";
+import { GET_FUNDS_DETAILS } from './constants';
 
 export const formatData = async (data, duration) => {
     let fundList = [];
-    const categoryList = Object.keys(data);
-    categoryList?.forEach((category) => {
-        const subCategoryList = Object.keys(data[category]);
-        subCategoryList.forEach((subCategory) => {
-            const fundHouseList = Object.keys(data[category][subCategory]);
-            fundHouseList.forEach((fundHouse) => {
-                data[category][subCategory][fundHouse].forEach((fund) => {
-                    const {
-                        c,
-                        kc,
-                        n,
-                        r,
-                        // re,
-                        v,
-                    } = fund;
-                    fundList.push({
-                        name: n,
-                        code: c,
-                        returns: r,
-                        volatility: v,
-                        categoryMentioned: kc,
-                        category,
-                        subCategory,
-                    });
-                });
-            });
+
+    data.data.funds.forEach(fund => {
+        const {name, sub_category: subCategory, category, unique_fund_code: code } = fund;
+        fundList.push({
+            name,
+            code,
+            category,
+            subCategory,
         });
     });
+
+    // const categoryList = Object.keys(data);
+    // categoryList?.forEach((category) => {
+    //     const subCategoryList = Object.keys(data[category]);
+    //     subCategoryList.forEach((subCategory) => {
+    //         const fundHouseList = Object.keys(data[category][subCategory]);
+    //         fundHouseList.forEach((fundHouse) => {
+    //             data[category][subCategory][fundHouse].forEach((fund) => {
+    //                 const {
+    //                     c,
+    //                     kc,
+    //                     n,
+    //                     r,
+    //                     // re,
+    //                     v,
+    //                 } = fund;
+    //                 fundList.push({
+    //                     name: n,
+    //                     code: c,
+    //                     returns: r,
+    //                     volatility: v,
+    //                     categoryMentioned: kc,
+    //                     category,
+    //                     subCategory,
+    //                 });
+    //             });
+    //         });
+    //     });
+    // });
 
     const DATA_BATCH_SIZE = 50;
     const NUMBER_OF_API_CALLS = Math.ceil(fundList.length / DATA_BATCH_SIZE);

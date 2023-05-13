@@ -67,8 +67,15 @@ function App() {
       width:120,
     },
     {
+      headerName: "1 week",
+      field: `details.returns.week_1`,
+      sortable: true,
+      filter: false,
+      width: 120,
+    },
+    {
       headerName: "1 year",
-      field: `returns.1`,
+      field: `details.returns.year_1`,
       sortable: true,
       filter: false,
       width: 120,
@@ -76,7 +83,7 @@ function App() {
     },
     {
       headerName: "3 year",
-      field: `returns.3`,
+      field: `details.returns.year_3`,
       sortable: true,
       filter: false,
       width: 120,
@@ -84,10 +91,18 @@ function App() {
     },
     {
       headerName: "5 year",
-      field: `returns.5`,
+      field: `details.returns.year_5`,
       sortable: true,
       filter: false,
       width: 120,
+      sort: 'desc',
+    },
+    {
+      headerName: "Inception",
+      field: `details.returns.inception`,
+      sortable: true,
+      filter: false,
+      width: 140,
       sort: 'desc',
     },
     {
@@ -100,7 +115,7 @@ function App() {
     },
     {
       headerName: "Volatility",
-      field: `volatility`,
+      field: `details.volatility`,
       sortable: true,
       filter: false,
       width: 150,
