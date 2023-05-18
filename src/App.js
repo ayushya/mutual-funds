@@ -67,11 +67,18 @@ function App() {
       width:120,
     },
     {
+      headerName: "1 Day",
+      field: `one_day_return`,
+      sortable: true,
+      filter: false,
+      width: 75,
+    },
+    {
       headerName: "1 week",
       field: `details.returns.week_1`,
       sortable: true,
       filter: false,
-      width: 120,
+      width: 100,
     },
     {
       headerName: "1 year",
@@ -110,7 +117,7 @@ function App() {
       field: `details.expense_ratio`,
       sortable: true,
       filter: false,
-      width: 180,
+      width: 165,
       sort: 'asc',
     },
     {

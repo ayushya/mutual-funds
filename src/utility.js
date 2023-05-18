@@ -6,12 +6,13 @@ export const formatData = async (data, duration) => {
     let fundList = [];
 
     data.data.funds.forEach(fund => {
-        const {name, sub_category: subCategory, category, unique_fund_code: code } = fund;
+        const {name, sub_category: subCategory, category, unique_fund_code: code, one_day_return } = fund;
         fundList.push({
             name,
             code,
             category,
             subCategory,
+            one_day_return,
         });
     });
 
