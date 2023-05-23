@@ -37,6 +37,13 @@ function App() {
     setGridApi(params.api);
   }
 
+  const CellWithLink = (params) => {
+    return  <a href={`https://kuvera.in/mutual-funds/fund/${params.data.details.slug}`} target="_blank" style={{
+     color: '#000',
+     textDecoration: 'none',
+    }} rel="noreferrer">{params.value}</a>;
+   };
+
   const columnDefs = [
     {
       headerName: "Fund Name",
@@ -44,6 +51,7 @@ function App() {
       sortable: true,
       filter: true,
       width: 400,
+      cellRenderer: CellWithLink,
     },
     {
       headerName: "Category",
@@ -51,6 +59,7 @@ function App() {
       sortable: true,
       filter: true,
       width: 120,
+      cellRenderer: CellWithLink,
     },
     {
       headerName: "Sub Category",
@@ -58,6 +67,7 @@ function App() {
       sortable: true,
       filter: true,
       width: 180,
+      cellRenderer: CellWithLink,
     },
     {
       headerName:"NAV",
@@ -65,6 +75,7 @@ function App() {
       sortable:true,
       filter:true,
       width:120,
+      cellRenderer: CellWithLink,
     },
     {
       headerName: "1 Day",
@@ -72,6 +83,7 @@ function App() {
       sortable: true,
       filter: false,
       width: 75,
+      cellRenderer: CellWithLink,
     },
     {
       headerName: "1 week",
@@ -79,6 +91,7 @@ function App() {
       sortable: true,
       filter: false,
       width: 100,
+      cellRenderer: CellWithLink,
     },
     {
       headerName: "1 year",
@@ -87,6 +100,7 @@ function App() {
       filter: false,
       width: 120,
       sort: 'desc',
+      cellRenderer: CellWithLink,
     },
     {
       headerName: "3 year",
@@ -95,6 +109,7 @@ function App() {
       filter: false,
       width: 120,
       sort: 'desc',
+      cellRenderer: CellWithLink,
     },
     {
       headerName: "5 year",
@@ -103,6 +118,7 @@ function App() {
       filter: false,
       width: 120,
       sort: 'desc',
+      cellRenderer: CellWithLink,
     },
     {
       headerName: "Inception",
@@ -111,6 +127,7 @@ function App() {
       filter: false,
       width: 140,
       sort: 'desc',
+      cellRenderer: CellWithLink,
     },
     {
       headerName: "Expense Ratio",
@@ -119,6 +136,7 @@ function App() {
       filter: false,
       width: 165,
       sort: 'asc',
+      cellRenderer: CellWithLink,
     },
     {
       headerName: "Volatility",
@@ -127,6 +145,7 @@ function App() {
       filter: false,
       width: 150,
       sort: 'asc',
+      cellRenderer: CellWithLink,
     }
   ];
 

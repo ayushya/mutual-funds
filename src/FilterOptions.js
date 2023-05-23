@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import axios from 'axios';
+import deepmerge from 'deepmerge';
 
 // import { makeStyles } from '@material-ui/core';
 import { GET_FUNDS } from './constants';
@@ -37,16 +38,13 @@ const FilterOptions = (props) => {
   // };
 
   useEffect(() => {
-    axios.get(GET_FUNDS)
-      .then(async (response) => {
-        const {data} = response; 
-        setRawFunds(data);
-        setFunds(await formatData(data, durationSelected));
-      });
-    // if (districtsSelected.length) {
-    //   loadDistrictData(stateSelected);
-    //   loadFreshData();
-    // }
+    (async () => {
+      const growth = await axios.get(GET_FUNDS('GROWTH')).then(r => r.data);
+      const dividend = await axios.get(GET_FUNDS('DIVIDEND')).then(r => r.data);
+      const data = deepmerge(growth, dividend);
+      setRawFunds(data);
+      setFunds(await formatData(data, durationSelected));
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
