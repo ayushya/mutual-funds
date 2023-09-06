@@ -38,7 +38,7 @@ function App() {
   }
 
   const CellWithLink = (params) => {
-    return  <a href={`https://kuvera.in/mutual-funds/fund/${params.data.details.slug}`} target="_blank" style={{
+    return  <a href={`https://kuvera.in/mutual-funds/fund/${params.data.details?.slug}`} target="_blank" style={{
      color: '#000',
      textDecoration: 'none',
     }} rel="noreferrer">{params.value}</a>;
