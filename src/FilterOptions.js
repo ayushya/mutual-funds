@@ -39,11 +39,19 @@ const FilterOptions = (props) => {
 
   useEffect(() => {
     (async () => {
-      const growth = await axios.get(GET_FUNDS('GROWTH')).then(r => r.data);
-      const dividend = await axios.get(GET_FUNDS('DIVIDEND')).then(r => r.data);
-      const data = deepmerge(growth, dividend);
-      setRawFunds(data);
-      setFunds(await formatData(data, durationSelected));
+
+      try {
+        const cachedServerData = await axios.get('https://mutual-funds.onrender.com/getFunds').then(r => r.data);
+        setFunds(cachedServerData);
+      } catch (error) {
+       console.log(error);
+       const growth = await axios.get(GET_FUNDS('GROWTH')).then(r => r.data);
+       const dividend = await axios.get(GET_FUNDS('DIVIDEND')).then(r => r.data);
+       const data = deepmerge(growth, dividend);
+       setRawFunds(data);
+       setFunds(await formatData(data, durationSelected));
+      }
+
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
