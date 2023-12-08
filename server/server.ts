@@ -1,11 +1,12 @@
 import bodyParser from 'body-parser';
 import compression from 'compression';
+import helmet from 'helmet';
 
 import app from './app';
 
 // Configure body-parser to handle JSON data
 app.use(bodyParser.json());
-// app.use(helmet()); // set well-known security-related HTTP headers
+app.use(helmet()); // set well-known security-related HTTP headers
 app.use(compression());
 
 app.disable("x-powered-by");
