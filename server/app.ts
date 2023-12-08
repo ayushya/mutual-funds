@@ -9,6 +9,8 @@ import {
 import { formatData } from './utility';
 
 const app = express();
+
+// Disable CORS 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -16,7 +18,6 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   next();
   });
-// app.use(cors());
 
 export const CACHE_EXPIRY = 60 * 60 * 1000; // 60 Mins
 
@@ -26,6 +27,12 @@ let dataCache = null;
 setInterval(() => {
   dataCache = null;
 }, CACHE_EXPIRY);
+
+// Self ping to keep the server alive
+setInterval(async () => {
+  await axios.get('https://mutual-funds.onrender.com');
+  await axios.get('https://mutual-funds.onrender.com/getFunds');
+}, 5 * 60 * 1000); // 5 mins
 
 app.get('/', (req, res) => {
         res.redirect('/healthcheck');
