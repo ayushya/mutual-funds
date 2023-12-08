@@ -69,7 +69,7 @@ export const formatData = async (data, duration) => {
     await Promise.all(promiseList);
 
     // Filter all the funds which are unavailable
-    return fundList.filter(
+    const filteredFunds = fundList.filter(
         (fund) =>
             !(
                 fund?.details?.sip_available === "N" &&
@@ -77,4 +77,29 @@ export const formatData = async (data, duration) => {
                 fund?.details?.redemption_allowed === "N"
             )
     );
+
+    // Reduce the transmitted data footprint by over 90%
+    return filteredFunds.map((fund) => {
+        return {
+            name: fund.name,
+            category: fund.category,
+            subCategory: fund.subCategory,
+            details: {
+                nav: {
+                    nav: fund.details?.nav?.nav,
+                },
+                returns: {
+                    week_1: fund.details?.returns?.week_1,
+                    year_1: fund.details?.returns?.year_1,
+                    year_3: fund.details?.returns?.year_3,
+                    year_5: fund.details?.returns?.year_5,
+                    inception: fund.details?.returns?.inception,
+                },
+                expense_ratio: fund.details?.expense_ratio,
+                volatility: fund.details?.volatility,
+                slug: fund.details?.slug,
+            },
+            one_day_return: fund.one_day_return,
+        }
+    });
 };

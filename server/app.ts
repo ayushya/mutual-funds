@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
         res.redirect('/healthcheck');
     });
   
-  app.get('/getFunds', async (req, res) => {  
+  app.get('/getFunds', async (req, res) => {
     if (!dataCache) {
       console.log('Fetching data from API')
       const growth = await axios.get(GET_FUNDS('GROWTH')).then(r => r.data);
