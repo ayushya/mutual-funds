@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mutual-funds/static/css/main.6bba183b.css",
+    "main.js": "/mutual-funds/static/js/main.431074b4.js",
+    "static/js/496.cc367313.chunk.js": "/mutual-funds/static/js/496.cc367313.chunk.js",
+    "index.html": "/mutual-funds/index.html",
+    "main.6bba183b.css.map": "/mutual-funds/static/css/main.6bba183b.css.map",
+    "main.431074b4.js.map": "/mutual-funds/static/js/main.431074b4.js.map",
+    "496.cc367313.chunk.js.map": "/mutual-funds/static/js/496.cc367313.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6bba183b.css",
+    "static/js/main.431074b4.js"
+  ]
+}
