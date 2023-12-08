@@ -25,12 +25,15 @@ app.get('/', (req, res) => {
   
   app.get('/getFunds', async (req, res) => {  
     if (!dataCache) {
+      console.log('Fetching data from API')
       const growth = await axios.get(GET_FUNDS('GROWTH')).then(r => r.data);
       const dividend = await axios.get(GET_FUNDS('DIVIDEND')).then(r => r.data);
       const rawData: any = deepmerge(growth, dividend);
   
       const data = await formatData(rawData, DEFAULT_DURATION);
       dataCache = data;
+    } else {
+      console.log('Serving from cache')
     }
 
     res.json(dataCache);
