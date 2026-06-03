@@ -1,17 +1,20 @@
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
+import { AllCommunityModule } from 'ag-grid-community';
 import React from 'react';
 
-import { AgGridReact } from 'ag-grid-react';
+import { AgGridProvider, AgGridReact } from 'ag-grid-react';
 
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress } from '@mui/material';
 
 import {
   DEFAULT_DURATION,
   DURATION_LIST,
 } from './constants';
 import FilterOptions from './FilterOptions';
+
+const agGridModules = [AllCommunityModule];
 
 function App() {
   const [duration, setDuration] = React.useState(DURATION_LIST);
@@ -154,36 +157,39 @@ function App() {
 
 
   return (
-    <div>
-      <FilterOptions {...propsToPass} />
-      {
-        funds?.length ?
-          <div className="ag-theme-alpine" style={{ height: calculatedHeight, width: '100%' }}>
-            <AgGridReact
-              defaultColDef={{
-                width: 120,
-                // editable: true,
-                // filter: 'agTextColumnFilter',
-                floatingFilter: true,
-                resizable: true,
-                suppressMovable: true
-              }}
-              columnDefs={columnDefs}
-              enableCellTextSelection={true}
-              defaultColGroupDef={{ marryChildren: true }}
-              animateRows={true}
-              // isExternalFilterPresent={() => true}
-              // doesExternalFilterPass={rowDataFilter}
-              onGridReady={onGridReady}
-              tooltipShowDelay={0}
-              rowData={funds}>
-            </AgGridReact>
-          </div> :
-          <div style={{ height: calculatedHeight, width: '100%', display: 'flex', justifyContent: 'center' }}>
-            <CircularProgress style={{ alignSelf: 'center' }} />
-          </div>
-      }
-    </div>
+    <AgGridProvider modules={agGridModules}>
+      <div>
+        <FilterOptions {...propsToPass} />
+        {
+          funds?.length ?
+            <div className="ag-theme-alpine" style={{ height: calculatedHeight, width: '100%' }}>
+              <AgGridReact
+                theme="legacy"
+                defaultColDef={{
+                  width: 120,
+                  // editable: true,
+                  // filter: 'agTextColumnFilter',
+                  floatingFilter: true,
+                  resizable: true,
+                  suppressMovable: true
+                }}
+                columnDefs={columnDefs}
+                enableCellTextSelection={true}
+                defaultColGroupDef={{ marryChildren: true }}
+                animateRows={true}
+                // isExternalFilterPresent={() => true}
+                // doesExternalFilterPass={rowDataFilter}
+                onGridReady={onGridReady}
+                tooltipShowDelay={0}
+                rowData={funds}>
+              </AgGridReact>
+            </div> :
+            <div style={{ height: calculatedHeight, width: '100%', display: 'flex', justifyContent: 'center' }}>
+              <CircularProgress style={{ alignSelf: 'center' }} />
+            </div>
+        }
+      </div>
+    </AgGridProvider>
   );
 }
 
