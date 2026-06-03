@@ -6,19 +6,28 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
 
-      - name: Build and Prepare for Deployment
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: yarn
+
+      - name: Test and Build
         run: |
-          rm -rf node_modules && yarn install --frozen-lockfile
-          yarn run predeploy
+          yarn install --frozen-lockfile
+          yarn test
+          yarn predeploy
 
       - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2.1.3
+        uses: crazy-max/ghaction-github-pages@v5
         with:
           # Build directory to deploy
           build_dir: build
